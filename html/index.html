@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+
+<style>
+    body {
+        background-color: gray;
+    }
+
+    .test-button {
+        background-color: transparent;
+        border: 3px solid white;
+        border-radius: 50%;
+        padding: 8px;              /* space between image and border */
+        cursor: pointer;
+
+        display: inline-flex;      /* key part */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: block;
+    }
+    .active{
+          border: 3px solid red;
+    }
+</style>
+</head>
+
+<body>
+    <button class="test-button">
+        <img src="pibble-pic.png" class="icon" alt="icon">
+    </button>
+    <button class="test-button">
+        <img src="pibble-pic2.png" class="icon" alt="icon">
+    </button>
+
+    <button class="test-button">
+        <img src="pibble-pic3.png" class="icon" alt="icon">
+    </button>
+
+    <button class="test-button">
+        <img src="pibble-pic4.png" class="icon" alt="icon">
+    </button>
+
+    <button class="test-button">
+        <img src="pibble-pic5.png" class="icon" alt="icon">
+    </button>
+</body>
+
+<script>
+     document.querySelectorAll(".test-button").forEach(btn => {
+     btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+    });
+});
+</script>
+</html>

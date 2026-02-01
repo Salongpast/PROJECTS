@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidebar Hover Logo</title>
+<style>
+:root {
+  /* Palette */
+  --accent-pink: #d68cb0;   /* highlight / active menu */
+  --dark-blue: #2b73e7;     /* secondary content bg */
+  --deep-blue: #1a2c75;     /* main page background */
+  --sidebar-bg: #000000;    /* black sidebar */
+  --text-color: #ffffff;
+  --font-size: 18px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  display: flex;
+  background: var(--deep-blue);
+  color: var(--text-color);
+}
+
+/* SIDEBAR */
+.sidebar {
+  color: var(--text-color);
+  background: linear-gradient(
+		295deg,rgba(0, 0, 0, 1) 9%, 
+		rgba(26, 44, 117, 1) 69%, 
+		rgba(21, 57, 138, 1) 94%);
+  width: 175px;
+  height: 100vh;
+  font-size: var(--font-size);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 48px;
+}
+
+/* LOGO AREA */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.logo-img {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logo-img img {
+  width: 30px;
+  transition: 0.3s;
+}
+
+/* HIDE BUTTON COMPLETELY WHEN COLLAPSED */
+.sidebar.collapsed .toggle-button {
+  display: none;
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  color: var(--text-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 5px 5px;             /* more comfortable click area */
+  margin: 5px 5px;               /* uniform spacing */
+  transition: all 0.3s ease;       /* smooth hover transitions */
+  border-radius: 8px 0 8px 0;      /* rounded on top-left and bottom-left */
+  cursor: pointer;
+  background: transparent;         /* clean default background */
+}
+
+.menu-item:hover {
+  background: var(--deep-blue);
+}
+
+.menu-item .icon {
+  margin-right: 10px;
+}
+
+.menu-item .text {
+  display: inline-block;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* HIDE TEXT WHEN COLLAPSED */
+.sidebar.collapsed .menu-item .text {
+  opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none;
+}
+
+/* BUTTONS */
+.toggle-button,
+.logo-img {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 24px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+/* MAIN CONTENT */
+main {
+  flex: 1;
+  margin-left: 5px;
+  background: var(--deep-blue);
+}
+
+main .container {
+  color: var(--text-color);
+  padding: 20px;
+  background: var(--accent-pink);
+  border: 1px solid var(--dark-blue);
+  border-radius: 8px;
+  margin: 20px;
+}
+
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo" id="logo">
+      <button class="logo-img"><img src="svgs/logo-icon.svg" alt="logo"
+           data-default="svgs/logo-icon.svg"
+           data-hover="svgs/menu-icon.svg"></button>
+			<button class="toggle-button"><img src="svgs/arrow-left-icon.svg" alt="menu"></button>
+    </div>
+    
+    <div class="menu">
+      <a href="#" class="menu-item">
+        <span class="icon"><img src="svgs/home-icon.svg"></span>
+        <span class="text">Home</span>
+      </a>
+      <a href="#" class="menu-item">
+        <span class="icon"><img src="svgs/chat-icon.svg"></span>
+        <span class="text">Messages</span>
+      </a>
+			<a href="#" class="menu-item">
+        <span class="icon"><img src="svgs/about-icon.svg"></span>
+        <span class="text">About</span>
+      </a>
+			<a href="#" class="menu-item">
+        <span class="icon"><img src="svgs/settings-icon.svg"></span>
+        <span class="text">Settings</span>
+      </a>
+    </div>
+  </div>
+  <main>
+    <div class="container">
+      <h1>This is a Page</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, impedit!</p>
+    </div>
+  </main>
+
+<script>
+const sidebar = document.querySelector(".sidebar");
+const toggleBtn = document.querySelector(".toggle-button");
+const logo = document.getElementById("logo");
+const logoImage = logo.querySelector(".logo-img img");
+
+// ---- NORMAL TOGGLE BUTTON ----
+toggleBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  sidebar.classList.toggle("collapsed");
+
+  // if expanded -> restore logo
+  if (!sidebar.classList.contains("collapsed")) {
+    logoImage.src = logoImage.dataset.default;
+  }
+});
+
+// ---- LOGO CLICK (EXPAND ONLY WHEN COLLAPSED) ----
+logo.addEventListener("click", () => {
+  if (sidebar.classList.contains("collapsed")) {
+    sidebar.classList.remove("collapsed");
+    logoImage.src = logoImage.dataset.default; // restore logo
+  }
+});
+
+// ---- HOVER SWAP ICON (ONLY WHEN COLLAPSED) ----
+logo.addEventListener("mouseenter", () => {
+  if (sidebar.classList.contains("collapsed")) {
+    logoImage.src = logoImage.dataset.hover;
+  }else {
+    window.location.href = "/test.html#";
+  }
+});
+
+logo.addEventListener("mouseleave", () => {
+  if (sidebar.classList.contains("collapsed")) {
+    logoImage.src = logoImage.dataset.default;
+  }
+});
+
+</script>
+
+
+
+</body>
+</html>

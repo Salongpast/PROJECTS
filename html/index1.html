@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+     <div id="main">
+          <div>
+               <p>This is a to do list</p>
+          </div>
+          
+          <div class="div-todo">
+               <input type="text" class="js-input">
+               <input type="date" class="js-date-input">
+               <button class="submit-button" onclick=" setList();" onkeydown=" if(event.key == 'Enter'){ setList(); }"> Submit </button>
+               <div class="display-div"> </div>
+          </div>
+     </div>
+     
+</body>
+<script src="scripts/js.js"></script>
+</html>
