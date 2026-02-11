@@ -1,0 +1,175 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+
+body {
+     font-family: 'Rubik', sans-serif;
+     font-weight: 500;
+     font-size: 15px;
+     color: #A1A1A8;
+}
+
+/* Navbar background */
+.navigator {
+     background-color: rgb(25, 26, 31);
+     height: 91px;
+     display: flex;
+     justify-content: center;
+}
+
+/* Container fixed width and flex layout */
+.navigator .container {
+     background-color: #191a1f;
+     width: 1200px;
+     height: 100%;
+
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+}
+
+.logo-link {
+     height: 91px;
+     position: relative;
+}
+
+
+.brand-logo {
+     width: 107.15px;
+     position: relative;
+}
+
+
+
+/* Nav list */
+.nav-bar-nav {
+     display: flex;
+     align-items: center;
+     list-style: none;
+     padding-left: 0;
+     margin-left: 0;
+}
+
+/* Nav items inside the list */
+.nav-bar-nav li {
+     padding: 0 16px;
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+     height: 100%;
+}
+
+/* Right nav items (buttons, icons) */
+.nav-items {
+     margin-left: auto;
+     /* push to right */
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     height: 100%;
+}
+
+.nav-items button {
+     background-color: #d6293e;
+     border: none;
+     padding: 8px 16px;
+     border-radius: 4px;
+     color: white;
+     cursor: pointer;
+}
+
+.nav-item.dropdown::after {
+     content: url('svgs/arrow-down-icon.svg');
+}
+
+.nav-item {
+     transition: color 0.3s ease;
+     position: relative;
+}
+
+.nav-item:hover,
+.dropdown-menu a:hover {
+     color: #2268f4;
+}
+
+.dropdown-menu {
+     display: none;
+     position: absolute;
+     top: 100%;
+     left: 0;
+     background-color: rgb(15, 15, 16);
+     border-radius: 4px;
+     list-style: none;
+     min-width: 160px;
+     padding: 16px 0 16px 0;
+     cursor: default;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+     display: block;
+}
+
+.dropdown-menu {
+     min-width: 200px;
+}
+
+.dropdown-menu a {
+     white-space: nowrap;
+     /* Prevent text from breaking */
+     display: block;
+     /* Make the <a> fill the menu width */
+     width: 100%;
+     /* Optional: ensures full width */
+     padding: 6.4px 16px;
+     /* Adjust padding to fit inside menu */
+     text-decoration: none;
+     color: #A1A1A8;
+     box-sizing: border-box;
+}
+
+
+.dropdown-menu li {
+     padding: 0;
+     white-space: nowrap;
+     width: 100%;
+}
+
+.nav-items {
+     white-space: nowrap;
+}
+
+.nav-items .toggle-container {
+     background-color: #A1A1A8;
+     width: 42px;
+     height: 12px;
+     border: none;
+     border-radius: 25px;
+}
+
+.toggle-circle {
+     position: relative;
+     top: -6px;
+     /* shift upward to center vertically */
+     left: 0;
+     /* starting position */
+     width: 24px;
+     height: 24px;
+     background-color: rgb(15, 15, 16);
+     border: 2px solid rgb(255, 255, 255);
+     border-radius: 50%;
+     transition: left 0.5s linear;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 16px;
+}
+
+.toggle-circle:hover {
+     left: 24px;
+}
+
+.icon {
+     pointer-events: none;
+}
