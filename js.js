@@ -79,7 +79,53 @@ function addEnvelope(containerId) {
      </div> `;
      container.innerHTML = envelopeHTML;
 }
+
+document.getElementById("btn-open").addEventListener("click", () => {
+     const envelope = document.getElementById("envelope");
+     envelope.classList.remove("close");
+     envelope.classList.add("open");
+
+     addHeartToEnvelope();
+});
+
+function addHeartToEnvelope() {
+     const envelope = document.getElementById("envelope");
+
+     if (!envelope) {
+          console.warn("Envelope element not found!");
+          return;
+     }
+
+     for (let i = 0; i < 3; i++) {
+          setTimeout(() => {
+               const heart = document.createElement("div");
+               heart.classList.add("heart");
+
+               // Random horizontal offset
+               const offsetX = Math.random() * 80 - 40; // -40px to +40px
+               heart.style.left = `calc(50% + ${offsetX}px)`;
+
+               // Force animation
+               heart.style.animation = "floatHeart 2s ease-in-out forwards";
+               heart.style.opacity = "1";
+
+               envelope.appendChild(heart);
+
+               // Remove after animation
+               setTimeout(() => {
+                    heart.remove();
+               }, 2000);
+
+          }, i * 350);
+     }
+}
+
+
+// Usage
+/*
 addEnvelope("content");
-enableStars(starsActive);
 clickme();
 test();
+*/
+enableStars(starsActive);
+
