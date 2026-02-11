@@ -1,0 +1,61 @@
+@keyframes ikot {
+     0% {
+          transform: rotate(-45deg) scale(1);
+     }
+
+     50% {
+          transform: rotate(-40deg) scale(1.2);
+     }
+
+     100% {
+          transform: rotate(-45deg) scale(1);
+     }
+}
+
+@keyframes twinkle {
+     0% {
+          opacity: 0;
+     }
+
+     50% {
+          opacity: 1;
+     }
+
+     100% {
+          opacity: 0;
+     }
+}
+
+@keyframes raiseZ {
+     to {
+          z-index: 8;
+     }
+}
+
+@keyframes dropZ {
+     to {
+          z-index: 2;
+     }
+}
+
+@keyframes floatHeart {
+     0% {
+          transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+          opacity: 0;
+     }
+
+     20% {
+          opacity: 1;
+     }
+
+     80% {
+          opacity: 1;
+          /* stays visible until 80% of the animation */
+     }
+
+     100% {
+          transform: translate(-50%, -50%) rotate(45deg) translateY(-120px);
+          opacity: 0;
+          /* fades out only at the end */
+     }
+}
