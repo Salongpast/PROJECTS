@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>Responsive Header</title>
+     <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+     <header class="site-header">
+          <div class="header-inner">
+               <div class="logo">MySite</div>
+
+               <nav class="nav">
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Contact</a>
+               </nav>
+
+               <button class="menu-btn" aria-label="Toggle menu">☰</button>
+          </div>
+
+          <nav class="mobile-nav">
+               <a href="#">Home</a>
+               <a href="#">About</a>
+               <a href="#">Services</a>
+               <a href="#">Contact</a>
+          </nav>
+
+          <nav class="mobile-bottom-nav">
+               <a href="#">Chat</a>
+               <a href="#">Bonus</a>
+               <a href="#">Games</a>
+               <a href="#">Wallet</a>
+               <a href="#">Wallet</a>
+          </nav>
+     </header>
+
+     <main class="site-main">
+          <div class="main-content">
+          </div>
+          <div class="main-content">
+          </div>
+          <div class="main-content">
+          </div>
+          <div class="main-content">
+          </div>
+
+     </main>
+
+     <script>
+          const menuBtn = document.querySelector(".menu-btn");
+          const mobileNav = document.querySelector(".mobile-nav");
+
+          menuBtn.addEventListener("click", () => {
+               mobileNav.classList.toggle("active");
+          });
+     </script>
+
+</body>
+
+</html>

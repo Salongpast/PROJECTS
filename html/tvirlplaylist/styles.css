@@ -1,0 +1,146 @@
+:root {
+     --space-1: 0.25rem;
+     /* 4px */
+     --space-2: 0.5rem;
+     /* 8px */
+     --space-3: 0.75rem;
+     /* 12px */
+     --space-4: 1rem;
+     /* 16px */
+     --space-5: 1.5rem;
+     /* 24px */
+     --space-6: 2rem;
+     /* 32px */
+
+     --radius-md: 0.5rem;
+     --bg-dark: #0b1d3a;
+     --bg-light: #132b4f;
+     --bg-back: #0b2d60;
+     --text-light: #ffffff;
+     --primary-color: #1a1c24;
+     --secondary-color: #16171c;
+     --shadow-color: rgba(0, 0, 0, 0.1);
+     --text-color: wheat;
+     --main-font: 'Rubiks', sans-serif;
+     --font-lg: 1.25rem;
+}
+
+/* Reset */
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: var(--main-font);
+}
+
+body {
+     background-color: var(--bg-dark);
+     width: 100%;
+     min-height: 200vh;
+     color: var(--text-color);
+}
+
+/* Header */
+.site-header {
+     width: 100%;
+     max-height: 64px;
+     position: fixed;
+     background-color: var(--bg-light);
+}
+
+.header-inner {
+     position: relative;
+     background-color: var(--bg-light);
+     max-height: 64px;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 20px;
+}
+
+.logo {
+     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+     font-weight: bold;
+     white-space: nowrap;
+}
+
+/* Main */
+.site-main {
+     top: 64px;
+     width: 100%;
+     position: fixed;
+     height: 200vh;
+}
+
+.main-content {
+     position: relative;
+     background-color: var(--primary-color);
+     max-width: 1200px;
+     height: 100vh;
+     margin: 0 auto;
+     padding: clamp(var(--space-3), 2vw, var(--space-5));
+     display: flex;
+     flex-direction: column;
+     gap: var(--space-1);
+}
+
+/* Covers */
+.cover,
+.cover1 {
+     position: relative;
+     width: 100%;
+     min-height: 200px;
+
+}
+
+.welcome {
+     display: inline-block;
+     position: absolute;
+     top: 40%;
+     left: 5%;
+}
+
+.main-content p {
+     width: fit-content;
+     font-size: clamp(var(--space-4), 2vw, var(--space-5));
+     font-weight: bold;
+     white-space: nowrap;
+}
+
+/* Cover1 header */
+.cover1-header {
+     display: flex;
+     align-items: center;
+     gap: var(--space-2);
+}
+
+.check {
+     font-size: var(--space-5);
+}
+
+/* Line */
+.line {
+     background-color: #ffffff;
+     flex: 1;
+     height: 2px;
+     border-radius: 1px;
+     /* subtle rounding for thin line */
+}
+
+/* Buttons container */
+.buttons {
+     display: flex;
+     gap: 0;
+     padding: 0;
+     margin: 0;
+     /* no space between flex items */
+}
+
+.left,
+.right {
+     width: 34px;
+     height: 30px;
+     padding: 6px 0;
+     /* remove horizontal padding */
+     border-radius: 10px;
+     box-sizing: border-box;
+}

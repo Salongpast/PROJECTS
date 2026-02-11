@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>TV Girl</title>
+     <link rel="stylesheet" href="style.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+     <!-- Header -->
+     <header class="site-header">
+          <div class="header-inner">
+               <div class="logo">TV Girl</div>
+               <nav class="header-nav">
+                    <a href="#" class="nav-link active">Home</a>
+                    <a href="#" class="nav-link">Movies</a>
+                    <a href="#" class="nav-link">Series</a>
+                    <a href="#" class="nav-link">Live</a>
+               </nav>
+               <div class="header-right">
+                    <button class="search-btn"><i class="ri-search-2-line"></i></button>
+                    <button class="menu" onclick="toggleMenu()"><i class="ri-menu-line" id="menuIcon"></i></button>
+               </div>
+          </div>
+     </header>
+
+     <!-- Menu Overlay -->
+     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+     <!-- Bottom Menu Drawer -->
+     <div class="menu-drawer" id="menuDrawer">
+          <div class="menu-handle"></div>
+          <div class="menu-items">
+               <a href="#" class="menu-item">
+                    <i class="ri-settings-3-line"></i>
+                    <span>Settings</span>
+               </a>
+               <a href="#" class="menu-item">
+                    <i class="ri-user-line"></i>
+                    <span>Profile</span>
+               </a>
+               <a href="#" class="menu-item">
+                    <i class="ri-heart-line"></i>
+                    <span>Favorites</span>
+               </a>
+               <a href="#" class="menu-item">
+                    <i class="ri-download-line"></i>
+                    <span>Downloads</span>
+               </a>
+               <a href="#" class="menu-item">
+                    <i class="ri-history-line"></i>
+                    <span>Watch History</span>
+               </a>
+               <a href="#" class="menu-item">
+                    <i class="ri-bell-line"></i>
+                    <span>Notifications</span>
+               </a>
+               <a href="#" class="menu-item">
+                    <i class="ri-help-circle-line"></i>
+                    <span>Help & Support</span>
+               </a>
+               <a href="#" class="menu-item">
+                    <i class="ri-logout-box-r-line"></i>
+                    <span>Log Out</span>
+               </a>
+          </div>
+     </div>
+
+     <!-- Main -->
+     <main class="site-main">
+          <div class="main-content">
+
+               <!-- Hero / Cover -->
+               <div class="cover">
+                    <div class="cover-overlay"></div>
+                    <div class="welcome">
+                         <p class="welcome-sub">WELCOME BACK,</p>
+                         <p class="welcome-name">Alex</p>
+                         <div class="welcome-actions">
+                              <button class="btn-play">
+                                   <i class="ri-play-fill"></i> Play
+                              </button>
+                              <button class="btn-mylist">
+                                   <i class="ri-add-line"></i> My List
+                              </button>
+                         </div>
+                    </div>
+               </div>
+
+               <!-- Carousel 1: Trending Now -->
+               <div class="cover1">
+                    <div class="cover1-header">
+                         <div class="check">Trending Now</div>
+                         <div class="line"></div>
+                         <div class="buttons">
+                              <button class="left" onclick="moveCarousel('trending', -1)"><i class="ri-arrow-left-line"></i></button>
+                              <button class="right" onclick="moveCarousel('trending', 1)"><i class="ri-arrow-right-line"></i></button>
+                         </div>
+                    </div>
+                    <div class="carousel-track-wrapper" id="trendingWrapper">
+                         <div class="carousel-track" id="trendingTrack"></div>
+                    </div>
+               </div>
+
+               <!-- Carousel 2: New Releases -->
+               <div class="cover1">
+                    <div class="cover1-header">
+                         <div class="check">New Releases</div>
+                         <div class="line"></div>
+                         <div class="buttons">
+                              <button class="left" onclick="moveCarousel('releases', -1)"><i class="ri-arrow-left-line"></i></button>
+                              <button class="right" onclick="moveCarousel('releases', 1)"><i class="ri-arrow-right-line"></i></button>
+                         </div>
+                    </div>
+                    <div class="carousel-track-wrapper" id="releasesWrapper">
+                         <div class="carousel-track" id="releasesTrack"></div>
+                    </div>
+               </div>
+
+               <!-- Carousel 3: Top Rated -->
+               <div class="cover1">
+                    <div class="cover1-header">
+                         <div class="check">Top Rated</div>
+                         <div class="line"></div>
+                         <div class="buttons">
+                              <button class="left" onclick="moveCarousel('toprated', -1)"><i class="ri-arrow-left-line"></i></button>
+                              <button class="right" onclick="moveCarousel('toprated', 1)"><i class="ri-arrow-right-line"></i></button>
+                         </div>
+                    </div>
+                    <div class="carousel-track-wrapper" id="topratedWrapper">
+                         <div class="carousel-track" id="topratedTrack"></div>
+                    </div>
+               </div>
+
+               <!-- Genre Section -->
+               <div class="cover1">
+                    <div class="cover1-header">
+                         <div class="check">Browse Genres</div>
+                         <div class="line"></div>
+                    </div>
+                    <div class="genres">
+                         <a href="#" class="genre-card genre-action">
+                              <i class="ri-sword-line"></i>
+                              <span>Action</span>
+                         </a>
+                         <a href="#" class="genre-card genre-comedy">
+                              <i class="ri-emotion-line"></i>
+                              <span>Comedy</span>
+                         </a>
+                         <a href="#" class="genre-card genre-drama">
+                              <i class="ri-film-line"></i>
+                              <span>Drama</span>
+                         </a>
+                         <a href="#" class="genre-card genre-horror">
+                              <i class="ri-skull-line"></i>
+                              <span>Horror</span>
+                         </a>
+                         <a href="#" class="genre-card genre-scifi">
+                              <i class="ri-rocket-line"></i>
+                              <span>Sci-Fi</span>
+                         </a>
+                         <a href="#" class="genre-card genre-romance">
+                              <i class="ri-heart-line"></i>
+                              <span>Romance</span>
+                         </a>
+                         <a href="#" class="genre-card genre-documentary">
+                              <i class="ri-camera-line"></i>
+                              <span>Documentary</span>
+                         </a>
+                         <a href="#" class="genre-card genre-thriller">
+                              <i class="ri-eye-line"></i>
+                              <span>Thriller</span>
+                         </a>
+                    </div>
+               </div>
+
+               <!-- Carousel 4: Continue Watching -->
+               <div class="cover1">
+                    <div class="cover1-header">
+                         <div class="check">Continue Watching</div>
+                         <div class="line"></div>
+                         <div class="buttons">
+                              <button class="left" onclick="moveCarousel('continue', -1)"><i class="ri-arrow-left-line"></i></button>
+                              <button class="right" onclick="moveCarousel('continue', 1)"><i class="ri-arrow-right-line"></i></button>
+                         </div>
+                    </div>
+                    <div class="carousel-track-wrapper" id="continueWrapper">
+                         <div class="carousel-track" id="continueTrack"></div>
+                    </div>
+               </div>
+
+               <!-- Carousel 5: Because You Watched -->
+               <div class="cover1">
+                    <div class="cover1-header">
+                         <div class="check">Because You Watched</div>
+                         <div class="line"></div>
+                         <div class="buttons">
+                              <button class="left" onclick="moveCarousel('because', -1)"><i class="ri-arrow-left-line"></i></button>
+                              <button class="right" onclick="moveCarousel('because', 1)"><i class="ri-arrow-right-line"></i></button>
+                         </div>
+                    </div>
+                    <div class="carousel-track-wrapper" id="becauseWrapper">
+                         <div class="carousel-track" id="becauseTrack"></div>
+                    </div>
+               </div>
+
+          </div>
+     </main>
+
+     <!-- Footer -->
+     <footer class="site-footer">
+          <div class="footer-inner">
+               <div class="footer-top">
+                    <div class="footer-logo">TV Girl</div>
+                    <div class="footer-links">
+                         <div class="footer-col">
+                              <h4>Browse</h4>
+                              <a href="#">Home</a>
+                              <a href="#">Movies</a>
+                              <a href="#">Series</a>
+                              <a href="#">Live TV</a>
+                         </div>
+                         <div class="footer-col">
+                              <h4>Company</h4>
+                              <a href="#">About Us</a>
+                              <a href="#">Careers</a>
+                              <a href="#">Press</a>
+                              <a href="#">Blog</a>
+                         </div>
+                         <div class="footer-col">
+                              <h4>Support</h4>
+                              <a href="#">Help Center</a>
+                              <a href="#">Contact</a>
+                              <a href="#">FAQ</a>
+                              <a href="#">Status</a>
+                         </div>
+                         <div class="footer-col">
+                              <h4>Legal</h4>
+                              <a href="#">Privacy Policy</a>
+                              <a href="#">Terms of Service</a>
+                              <a href="#">Cookie Policy</a>
+                              <a href="#">Licenses</a>
+                         </div>
+                    </div>
+               </div>
+               <div class="footer-bottom">
+                    <p>&copy; 2025 TV Girl. All rights reserved.</p>
+                    <div class="footer-socials">
+                         <a href="#"><i class="ri-twitter-x-line"></i></a>
+                         <a href="#"><i class="ri-instagram-line"></i></a>
+                         <a href="#"><i class="ri-youtube-line"></i></a>
+                         <a href="#"><i class="ri-facebook-circle-line"></i></a>
+                    </div>
+               </div>
+          </div>
+     </footer>
+
+     <script src="script.js"></script>
+</body>
+
+</html>

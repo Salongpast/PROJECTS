@@ -1,34 +1,235 @@
-*{
+:root {
+     --linear-grad: linear-gradient(135deg, #fae1dd 0%, #f8b4b4 100%);
+     --linear-grad: linear-gradient(135deg, #2a0d36, #1a0b3d 100%);
+     --default: #1a0b3d;
+}
+
+* {
      margin: 0;
      padding: 0;
-     color: white;
+     box-sizing: border-box;
 }
+
 body {
-    background: #0b1d3a;
+     display: grid;
+     place-items: center;
+     min-height: 100vh;
+     background: var(--linear-grad);
+     font-family: 'Rubik', sans-serif;
+     overflow: hidden;
 }
 
-.container {
-    display: grid;
-    width: 100vw;
-    height: 100vh;
-    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-    grid-auto-rows: 50px;
+#content {
+     width: 100vw;
+     height: 100vh;
+     z-index: 1;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 }
 
-.grid-item {
-    opacity: 0;
-    width: 50px;
-    height: 50px;
-    background: orange;
-    transition: transform 0.3s ease;
-    animation: pulse 1s 1; /* animation loop */
-    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+#envelope {
+     position: relative;
+     width: 280px;
+     height: 180px;
+     background-color: #000000;
+     border-bottom-left-radius: 6px;
+     border-bottom-right-radius: 6px;
+     margin-left: auto;
+     margin-right: auto;
+     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+     z-index: 1;
+     /* base layer */
 }
 
-/* keyframes for fade in/out */
-@keyframes pulse {
-    0%   { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+.front {
+     position: absolute;
+     width: 0;
+     height: 0;
+     z-index: 2;
+     /* pocket and letter layer */
 }
 
+.flap {
+     border-left: 140px solid transparent;
+     border-right: 140px solid transparent;
+     border-bottom: 82px solid transparent;
+     border-top: 98px solid brown;
+     transform-origin: top;
+     z-index: 10;
+     /* flap always on top */
+}
+
+.pocket {
+     border-left: 140px solid gray;
+     border-right: 140px solid gray;
+     border-bottom: 90px solid bisque;
+     border-top: 98px solid transparent;
+     border-bottom-left-radius: 6px;
+     border-bottom-right-radius: 6px;
+     pointer-events: none;
+     z-index: 4;
+}
+
+.letter {
+     position: absolute;
+     left: 10%;
+     width: 80%;
+     height: 80%;
+     background-color: rgb(255, 255, 255);
+     border-radius: 3px;
+     box-sizing: border-box;
+}
+
+.letter::before {
+     position: absolute;
+     content: '';
+     margin: 10px;
+     width: 90%;
+     height: 90%;
+     border: 2px dashed;
+     z-index: 1;
+}
+
+.message {
+     margin: 10px 20px;
+     font-size: 16px;
+     color: #000;
+     line-height: 1.4;
+     text-align: center;
+}
+
+.line1 {
+     font-size: 12px;
+     margin: 10px 15px;
+     text-align: center;
+}
+
+.heart {
+     position: absolute;
+     left: 30%;
+     width: 50px;
+     height: 50px;
+     background-color: red;
+     transform: rotate(-45deg);
+}
+
+.open .heart {
+     animation: ikot 2s infinite ease-in-out;
+}
+
+/* Left circle */
+.heart::before {
+     content: "";
+     position: absolute;
+     top: -25px;
+     /* half of new size */
+     left: 0;
+     width: 50px;
+     height: 50px;
+     background-color: red;
+     border-radius: 50%;
+}
+
+/* Right circle */
+.heart::after {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 25px;
+     /* half of new size */
+     width: 50px;
+     height: 50px;
+     background-color: red;
+     border-radius: 50%;
+}
+
+.open .click-me {
+     position: absolute;
+     left: 25%;
+     width: 80px;
+     height: 50px;
+     cursor: pointer;
+     z-index: 20000;
+     background: transparent;
+     border: none;
+
+}
+
+.words {
+     margin: 10px;
+     width: 90%;
+     height: 10px;
+     background-color: #000000;
+     z-index: 2;
+}
+
+.open .flap {
+     transform: rotateX(180deg);
+     transition: transform 0.4s ease 0s;
+     z-index: 2;
+}
+
+.close .flap {
+     transform: rotateX(0deg);
+     transition: transform 0.4s ease 0.4s, z-index 8s;
+     z-index: 10;
+}
+
+.open .letter {
+     transform: translateY(-60px);
+     transition: transform 0.4s ease 0.4s;
+     z-index: 2;
+}
+
+.close .letter {
+     transform: translateY(0px);
+     transition: transform 0.4s ease 0s;
+     /* letter moves down immediately */
+     z-index: 2;
+}
+
+#test {
+     position: absolute;
+     left: -15px;
+     top: -10px;
+     z-index: 1000;
+     cursor: pointer;
+}
+
+
+.star {
+     position: absolute;
+     border-radius: 50%;
+     opacity: 0;
+     animation: twinkle 2s infinite ease-in-out;
+     z-index: 0;
+}
+
+@keyframes ikot {
+     0% {
+          transform: rotate(-45deg) scale(1);
+     }
+
+     50% {
+          transform: rotate(-40deg) scale(1.2);
+     }
+
+     100% {
+          transform: rotate(-45deg) scale(1);
+     }
+}
+
+@keyframes twinkle {
+     0% {
+          opacity: 0;
+     }
+
+     50% {
+          opacity: 1;
+     }
+
+     100% {
+          opacity: 0;
+     }
+}
