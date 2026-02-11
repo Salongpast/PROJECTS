@@ -77,6 +77,20 @@ function addEnvelope(containerId) {
      }
      initEnvelopeButton();
 }
+function addGame(containerId) {
+     const container = document.getElementById(containerId);
+     if (!container) return;
+
+     container.innerHTML = `<div id="game" class="game-activated" style="position: absolute; width: 100vw; height: 100vh;"></div>`;
+     gameactivated();
+}
+
+function clear(containerId){
+     const container = document.getElementById(containerId);
+     if (!container) return;
+
+     container.innerHTML = "";
+}
 
 function addHeartToEnvelope() {
      const envelope = document.getElementById("envelope");

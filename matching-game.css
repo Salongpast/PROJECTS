@@ -1,0 +1,50 @@
+#game {
+     display: grid;
+     grid-template-columns: repeat(9, 60px);
+     grid-template-rows: repeat(9, 60px);
+     gap: 5px;
+     align-items: center;
+     justify-content: center;
+     margin-top: 50px;
+}
+
+.card {
+     width: 60px;
+     height: 60px;
+     background: pink;
+     border-radius: 8px;
+     perspective: 600px;
+     cursor: pointer;
+     position: relative;
+     transform-style: preserve-3d;
+     transition: transform 0.6s;
+}
+
+.card.flipped {
+     transform: rotateY(180deg);
+}
+
+.card .front,
+.card .back {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     backface-visibility: hidden;
+     border-radius: 8px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 24px;
+     font-weight: bold;
+}
+
+.card .front {
+     background: pink;
+}
+
+.card .back {
+     transform: rotateY(180deg);
+     background-size: cover;
+     background-position: center;
+     border-radius: 8px;
+}
