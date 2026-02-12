@@ -21,6 +21,18 @@ body {
      overflow: hidden;
 }
 
+#btn-open {
+     position: absolute;
+     top: 40%;
+     left: 25%;
+     height: 100px;
+     min-width: 270px;
+     z-index: 200;
+     cursor: pointer;
+     border: none;
+     background-color: transparent;
+}
+
 #content {
      width: 100vw;
      height: 100vh;
@@ -38,4 +50,3 @@ body {
      animation: twinkle 2s infinite ease-in-out;
      z-index: 0;
 }
-

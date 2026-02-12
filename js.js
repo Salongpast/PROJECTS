@@ -25,7 +25,7 @@ function enableStars(active, symbol = "♥") {
      if (!active) return;
 
      const starCount = 200;
-     const minSize = 20, maxSize = 30;
+     const minSize = 15, maxSize = 20;
      const minDuration = 2, maxDuration = 5;
 
      for (let i = 0; i < starCount; i++) {
@@ -62,20 +62,9 @@ function addEnvelope(containerId) {
             <div class="front top"></div>
             <div class="front right"></div>
             <div class="front left"></div>
-            <button id="btn-open">Open</button>
+            <button id="btn-open" onclick="openEnvelope();"></button>
         </div>
     `;
-     function initEnvelopeButton() {
-          const button = document.getElementById("btn-open");
-          const envelope = document.getElementById("envelope");
-          if (!button || !envelope) return;
-
-          button.addEventListener("click", () => {
-               toggleClasses(envelope, "close", "open");
-               addHeartToEnvelope();
-          });
-     }
-     initEnvelopeButton();
 }
 function addGame(containerId) {
      const container = document.getElementById(containerId);
@@ -85,20 +74,20 @@ function addGame(containerId) {
      gameactivated();
 }
 
-function clear(containerId){
+function clear(containerId) {
      const container = document.getElementById(containerId);
      if (!container) return;
 
      container.innerHTML = "";
 }
 
-function addHeartToEnvelope() {
+function openEnvelope() {
      const envelope = document.getElementById("envelope");
+     const button = document.getElementById("btn-click");
      if (!envelope) {
-          console.warn("Envelope element not found!");
           return;
      }
-
+     toggleClasses(envelope, "close", "open")
      for (let i = 0; i < 3; i++) {
           setTimeout(() => {
                const heart = document.createElement("div");
@@ -118,28 +107,9 @@ function addHeartToEnvelope() {
                setTimeout(() => heart.remove(), 2000);
           }, i * 350);
      }
+
+
 }
 
-// ==============================
-// Event handlers
-// ==============================
-
-
-function initClickMeButton() {
-     let envelope = document.getElementById("envelope");
-     let button = document.getElementById("btn-open");
-     if (!button) return;
-
-     button.addEventListener("click", () => {
-          enableStars(starsActive, "I LOVE YOUU!");
-     });
-}
-
-// ==============================
-// Usage
-// ==============================
-/*
 addEnvelope("content");
-initClickMeButton();
-*/
 enableStars(starsActive);
