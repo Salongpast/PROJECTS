@@ -28,6 +28,32 @@
      }
 }
 
+@keyframes letter-heartbeat {
+     0% {
+          transform: translateX(-50%) rotate(-45deg) scale(1);
+     }
+
+     14% {
+          transform: translateX(-50%) rotate(-45deg) scale(1.2);
+     }
+
+     28% {
+          transform: translateX(-50%) rotate(-45deg) scale(1);
+     }
+
+     42% {
+          transform: translateX(-50%) rotate(-45deg) scale(1.2);
+     }
+
+     70% {
+          transform: translateX(-50%) rotate(-45deg) scale(1);
+     }
+
+     100% {
+          transform: translateX(-50%) rotate(-45deg) scale(1);
+     }
+}
+
 @keyframes ikot {
      0% {
           transform: scale(1);
