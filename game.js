@@ -204,28 +204,40 @@ function shortcutWin() {
 }
 
 // ------------------- Floating Hearts -------------------
-function victoryHearts(count = 20, src = "img/dog/image1.png") {
+function victoryHearts(count = 20) {
+     // Combine all images from both sets
+     const allImages = [...imageSets[1], ...imageSets[2]];
+
      for (let i = 0; i < count; i++) {
           setTimeout(() => {
                const heart = document.createElement("img");
-               heart.src = src;
+
+               // Pick a random image from allImages
+               const randomIndex = Math.floor(Math.random() * allImages.length);
+               heart.src = allImages[randomIndex];
+
                heart.classList.add("victory-heart");
 
+               // Random horizontal position
                const offsetX = Math.random() * 90;
                heart.style.left = `${offsetX}vw`;
 
+               // Random size
                const size = 20 + Math.random() * 20;
                heart.style.width = `${size}px`;
                heart.style.height = `${size}px`;
 
+               // Random animation duration
                const duration = 1.5 + Math.random();
                heart.style.animationDuration = `${duration}s`;
 
                document.body.appendChild(heart);
+
                setTimeout(() => heart.remove(), duration * 1000);
           }, i * 150);
      }
 }
+
 
 // ------------------- Utility -------------------
 function getRandom(min, max) {

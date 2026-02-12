@@ -61,7 +61,7 @@ function addEnvelope(containerId) {
                <div class="letter">
                     <p class = "p1">Hello Baby,</p>
                     <p class = "p2"style=" text-indent: 30px; text-align: justify;">Love, Baby, my Eli, Love, Baby, thank you for being the love of my life. I’m so grateful for you and for us. eto una nating valentines together, we can't meet naman sa day ng valentines and cant buy you flowers yet so I made you this made to show how much I appreciate you. I love you, I hope you enjoy!</p>
-                    <div class = "letter-btn"><button></button></div>
+                    <div class = "letter-btn" onclick="victoryHearts()"><button></button></div>
                     <div class = "letter-heart"></div>
                     <p class = "click-me">click my beating heart</p>
                </div>
