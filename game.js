@@ -1,10 +1,44 @@
-var gamematch = document.getElementById('game');
+// ------------------- Global Variables -------------------
+let currentImageSet = 1; // Track which set is active
+const gamematch = document.getElementById('game');
 
+const imageSets = {
+     1: [
+          "img/dog/image1.png",
+          "img/dog/image2.png",
+          "img/dog/image3.png",
+          "img/dog/image4.png",
+          "img/dog/image5.png",
+          "img/dog/image6.png",
+          "img/dog/image7.png",
+          "img/dog/image8.png",
+          "img/dog/image9.png",
+          "img/dog/image10.png",
+          "img/dog/image11.png",
+          "img/dog/image12.png"
+     ],
+     2: [
+          "img/us/image1.png",
+          "img/us/image2.png",
+          "img/us/image3.png",
+          "img/us/image4.png",
+          "img/us/image5.png",
+          "img/us/image6.png",
+          "img/us/image7.png",
+          "img/us/image8.png",
+          "img/us/image9.png",
+          "img/us/image10.png",
+          "img/us/image11.png",
+          "img/us/image12.png"
+     ]
+};
+
+// ------------------- Game Activation -------------------
 function gameactivated() {
-     if (!(gamematch && gamematch.classList.contains('game-activated'))) {
-          return;
-     }
+     gamematch.classList.add('game-activated');
+     if (!(gamematch && gamematch.classList.contains('game-activated'))) return;
 
+     gamematch.innerHTML = ""; // Clear previous cards
      let matchedCount = 0;
 
      const heartPattern = [
@@ -19,10 +53,8 @@ function gameactivated() {
           [0, 0, 0, 0, 0, 0, 0, 0, 0]
      ];
 
-     const game = document.getElementById("game");
-
-     // Create cards based on heart pattern
      let cards = [];
+
      for (let r = 0; r < heartPattern.length; r++) {
           for (let c = 0; c < heartPattern[r].length; c++) {
                if (heartPattern[r][c] === 1) {
@@ -38,50 +70,34 @@ function gameactivated() {
                     card.appendChild(front);
                     card.appendChild(back);
 
-                    game.appendChild(card);
+                    gamematch.appendChild(card);
                     cards.push(card);
                } else {
-                    // Empty cell
                     const empty = document.createElement("div");
-                    game.appendChild(empty);
+                    gamematch.appendChild(empty);
                }
           }
      }
 
-     // ------------------- Image setup -------------------
-     const images = [
-          "img/image1.png",
-          "img/image2.png",
-          "img/image3.png",
-          "img/image4.png",
-          "img/image5.png",
-          "img/image6.png",
-          "img/image7.png",
-          "img/image8.png",
-          "img/image9.png",
-          "img/image10.png",
-          "img/image11.png",
-          "img/image12.png"
-     ];
-
-     // Duplicate images for pairs
+     // ------------------- Assign Images -------------------
+     const activeImages = imageSets[currentImageSet];
      const pairCount = Math.floor(cards.length / 2);
-     let selectedImages = images.slice(0, pairCount);
+     let selectedImages = activeImages.slice(0, pairCount);
      let cardImages = [...selectedImages, ...selectedImages];
 
-     // Shuffle images
+     // Shuffle
      cardImages.sort(() => Math.random() - 0.5);
 
-     // Assign images to cards
+     // Assign to cards
      cards.forEach((card, index) => {
           const back = card.querySelector(".back");
           back.style.backgroundImage = `url(${cardImages[index]})`;
           back.style.backgroundSize = "cover";
           back.style.backgroundPosition = "center";
-          card.dataset.value = cardImages[index]; // use image URL as identifier
+          card.dataset.value = cardImages[index];
      });
 
-     // ------------------- Game logic -------------------
+     // ------------------- Game Logic -------------------
      let flipped = [];
      let lock = false;
 
@@ -97,11 +113,9 @@ function gameactivated() {
                     setTimeout(() => {
                          const [c1, c2] = flipped;
                          if (c1.dataset.value === c2.dataset.value) {
-                              // Match found
                               matchedCount += 2;
                               addHeartOnPair(c1, c2);
                          } else {
-                              // Not a match
                               c1.classList.remove("flipped");
                               c2.classList.remove("flipped");
                          }
@@ -109,13 +123,8 @@ function gameactivated() {
                          flipped = [];
                          lock = false;
 
-                         // Check if all cards are matched
                          if (matchedCount === cards.length) {
-                              // Game finished!
-                              setTimeout(() => {
-                                   gameDone()
-
-                              }, 500);
+                              setTimeout(() => gameDone(cards), 500);
                          }
                     }, 1000);
                }
@@ -123,71 +132,152 @@ function gameactivated() {
      });
 }
 
-function gameDone() {
-     gamematch.classList.add('done');
-     victoryHearts();
-}
-
+// ------------------- Add Heart on Match -------------------
 function addHeartOnPair(c1, c2) {
      [c1, c2].forEach(card => {
           for (let i = 0; i < 3; i++) {
                setTimeout(() => {
                     const heart = document.createElement("div");
                     heart.classList.add("heart");
-
                     const offsetX = getRandom(-40, 40);
                     heart.style.left = `calc(50% + ${offsetX}px)`;
-
                     heart.style.animation = "floatHeart 2s ease-in-out forwards";
                     heart.style.opacity = "1";
-
                     card.appendChild(heart);
-
                     setTimeout(() => heart.remove(), 2000);
                }, i * 300);
           }
      });
 }
 
-function shortcutWin() {
-     const cards = document.querySelectorAll("#game .card");
-
+// ------------------- Show Hearts on All Cards -------------------
+function showHeartsOnAllCards(cards) {
      cards.forEach(card => {
-          card.classList.add("flipped");
+          for (let i = 0; i < 3; i++) {
+               setTimeout(() => {
+                    const heart = document.createElement("div");
+                    heart.classList.add("heart");
+                    const offsetX = getRandom(-40, 40);
+                    heart.style.left = `calc(50% + ${offsetX}px)`;
+                    heart.style.animation = "floatHeart 2s ease-in-out forwards";
+                    heart.style.opacity = "1";
+                    card.appendChild(heart);
+                    setTimeout(() => heart.remove(), 2000);
+               }, i * 200);
+          }
      });
-
-     // Instantly mark all as matched
-     setTimeout(() => {
-          gameDone();
-     }, 600);
 }
 
-function victoryHeartsImage(count = 20, src = "img/image1.png") {
+// ------------------- Game Finished -------------------
+async function gameDone(cards) {
+     gamematch.classList.add('done');
+     showHeartsOnAllCards(cards);
+     victoryHearts();
+
+     const container = document.getElementById("container");
+     const continueBtn = document.getElementById("continueBtn");
+
+     container.classList.remove("close");
+     container.classList.add("open");
+
+     await waitForClick(continueBtn);
+
+     container.classList.remove("open");
+     container.classList.add("close");
+     gamematch.classList.remove('done');
+
+     if (currentImageSet === 1) {
+          currentImageSet = 2;
+          gameactivated(); // load set 2
+     } else if (currentImageSet === 2) {
+          loadNextGame(); // move to next game
+     }
+}
+
+// ------------------- Shortcut Win -------------------
+function shortcutWin() {
+     const cards = document.querySelectorAll("#game .card");
+     cards.forEach(card => {
+          if (!card.classList.contains("flipped")) card.classList.add("flipped");
+     });
+     setTimeout(() => gameDone(cards), 300);
+}
+
+// ------------------- Floating Hearts -------------------
+function victoryHearts(count = 20, src = "img/dog/image1.png") {
      for (let i = 0; i < count; i++) {
           setTimeout(() => {
                const heart = document.createElement("img");
                heart.src = src;
                heart.classList.add("victory-heart");
 
-               // Random horizontal position
-               const offsetX = Math.random() * 90; // 0% to 90% of screen width
+               const offsetX = Math.random() * 90;
                heart.style.left = `${offsetX}vw`;
 
-               // Random size variation (optional)
-               const size = 20 + Math.random() * 20; // 20px to 40px
+               const size = 20 + Math.random() * 20;
                heart.style.width = `${size}px`;
                heart.style.height = `${size}px`;
 
-               // Random animation duration
-               const duration = 1.5 + Math.random(); // 1.5s to 2.5s
+               const duration = 1.5 + Math.random();
                heart.style.animationDuration = `${duration}s`;
 
                document.body.appendChild(heart);
-
-               // Remove after animation
                setTimeout(() => heart.remove(), duration * 1000);
           }, i * 150);
      }
 }
 
+// ------------------- Utility -------------------
+function getRandom(min, max) {
+     return Math.random() * (max - min) + min;
+}
+
+function waitForClick(button) {
+     return new Promise(resolve => {
+          button.addEventListener("click", function handler() {
+               button.removeEventListener("click", handler);
+               resolve();
+          });
+     });
+}
+
+// ------------------- Load Next Game -------------------
+function loadNextGame() {
+     addValentine('content');
+     ValentineGame();
+}
+
+function ValentineGame() {
+     // Early return if Valentine box does not exist
+     const valBox = document.getElementById("valentine-box");
+     if (!valBox) return;
+
+     const yesBtn = valBox.querySelector(".yes-btn");
+     const noBtn = valBox.querySelector(".no-btn");
+
+     if (!yesBtn || !noBtn) return; // Extra safety
+
+     // Function to grow the Yes button
+     function growYesButton() {
+          // Get current width, height, font-size, padding
+          const style = window.getComputedStyle(yesBtn);
+          const currentFontSize = parseFloat(style.fontSize);
+          const currentPaddingY = parseFloat(style.paddingTop);
+          const currentPaddingX = parseFloat(style.paddingLeft);
+
+          // Increase font size and padding
+          yesBtn.style.fontSize = (currentFontSize + 4) + "px";
+          yesBtn.style.padding = (currentPaddingY + 2) + "px " + (currentPaddingX + 4) + "px";
+     }
+
+     // On hovering or clicking No button, grow Yes button
+     noBtn.addEventListener("click", growYesButton);
+
+     // Optional: Yes button click action
+     yesBtn.addEventListener("click", () => {
+          alert("Yay I LOVE YOUUU! 💖");
+          addEnvelope('content');
+          valBox.remove(); // Close popup
+     });
+}
 gameactivated();

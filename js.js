@@ -78,8 +78,28 @@ function addGame(containerId) {
      const container = document.getElementById(containerId);
      if (!container) return;
 
-     container.innerHTML = `<div id="game" class="game-activated" style="position: absolute; width: 100vw; height: 100vh;"></div>`;
-     gameactivated();
+     container.innerHTML = `
+     <div id="container" class="close">
+          <div class="popup">
+               <button id="continueBtn">Continue?</button>
+          </div>
+     </div>
+     <div id="game" class="game-activated" style="position: absolute; width: 100vw; height: 100vh;"></div>
+     `;
+}
+
+function addValentine(containerId) {
+     const container = document.getElementById(containerId);
+     if (!container) return;
+
+     container.innerHTML = `
+     <div id="valentine-box">
+          <img src="img/please.gif" alt="Description of the GIF" width="100" height="100">
+          <h1>Will you be my Valentine?</h1>
+          <button class="yes-btn">Yes 💖</button>
+          <button class="no-btn">No 😢</button>
+     </div>
+     `;
 }
 
 function clear(containerId) {
@@ -119,9 +139,8 @@ function openEnvelope() {
 
 }
 
-function switchTo() {
+// Start stars
+enableStars(true);
+addGame("content");
 
-}
 
-addEnvelope("content");
-enableStars(starsActive);

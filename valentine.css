@@ -1,0 +1,37 @@
+#valentine-box {
+     position: absolute;
+     width: 400px;
+     height: 300px;
+     text-align: center;
+     padding: 30px 50px;
+     background-color: rgb(205, 142, 142);
+     border-radius: 16px;
+     box-shadow: 0 5px 20px rgba(226, 108, 108, 0.2);
+     position: relative;
+     background-color: white;
+}
+
+#valentine-box h1 {
+     color: #ff3c6e;
+     margin-bottom: 20px;
+     font-size: 24px;
+}
+
+#valentine-box button {
+     padding: 12px 24px;
+     font-size: 16px;
+     border: none;
+     border-radius: 8px;
+     margin: 10px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+}
+
+#valentine-box .yes-btn {
+     background-color: #ff5c8a;
+     color: white;
+}
+
+#valentine-box .no-btn {
+     background-color: #f30000;
+}

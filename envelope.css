@@ -270,21 +270,27 @@
 }
 
 @media (max-width: 1024px) {
-     #envelope {
+
+     #envelope,
+     #game {
           --scale: 0.8;
           /* 80% size */
      }
 }
 
 @media (max-width: 768px) {
-     #envelope {
+
+     #envelope,
+     #game {
           --scale: 0.6;
           /* 60% size */
      }
 }
 
 @media (max-width: 480px) {
-     #envelope {
+
+     #envelope,
+     #game {
           --scale: 0.5;
           /* 50% size */
      }
